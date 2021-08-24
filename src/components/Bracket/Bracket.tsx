@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Round from "./Round";
 import styled from "styled-components";
+import { useAtom } from "jotai";
+import { notificationAtom } from "../Notification";
 
 const Container = styled.div`
   display: flex;
@@ -39,6 +41,7 @@ interface BracketProps {
 function Bracket({ startingTeams }: BracketProps) {
   // TODO: Always check if the number of teams is a power of 2
   const [bracket, setBracket] = useState<Team[][][]>([]);
+  const [, setNotification] = useAtom(notificationAtom);
 
   const setWinner = (
     roundId: number,
@@ -61,7 +64,7 @@ function Bracket({ startingTeams }: BracketProps) {
   const submitWinners = (roundId: number) => {
     setBracket((prevState) => {
       if (Math.log2(prevState[0].length) % 1 !== 0) {
-        console.log("Not enough players");
+        setNotification("Not enough players");
         return prevState;
       }
       const prevWinner = prevState[roundId].map(
