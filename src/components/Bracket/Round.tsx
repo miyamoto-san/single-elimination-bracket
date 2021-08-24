@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import Teams from "./Teams";
+import { colors } from "../common/style";
 
 const Table = styled(motion.table)`
   display: flex;
@@ -16,7 +17,7 @@ const Table = styled(motion.table)`
     td {
       display: flex;
       padding: 0;
-      color: #f2f2f2;
+      color: ${colors.white};
     }
   }
   .teamName {
